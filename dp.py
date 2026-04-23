@@ -7,7 +7,7 @@ import requests
 
 load_dotenv()
 
-apiKey = getenv("6hzv0g1mmmux8d39lwsa91pzjgnms1") or "your phamerator API key here" # replace this with your actual phamerator API key
+apiKey = getenv("API_KEY") or "6hzv0g1mmmux8d39lwsa91pzjgnms1" # replace this with your actual phamerator API key
 if apiKey == "your phamerator API key here":
     print("Please replace the apiKey variable with your actual phamerator API key,\n" \
     "which can be obtained by creating an account on https://phamerator.org and generating\n" \
