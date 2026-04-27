@@ -17,7 +17,7 @@ if apiKey == "your phamerator API key here":
 
 dataset = "Actino_Draft"
 
-subcluster = "C2" # use the subcluster that you want to analyze, for example "G2" for the G2 subcluster of actinobacteriophages
+subcluster = "G3" # use the subcluster that you want to analyze, for example "G2" for the G2 subcluster of actinobacteriophages
 
 headers = {
     "Authorization": f"Bearer {apiKey}",
@@ -107,3 +107,34 @@ for i in range(len(phages)):
     for j in range(i + 1, len(phages)):
         print(f"Comparing {phages[i]['phagename']} and {phages[j]['phagename']}...")
         createDPMatrix(phages[i], phages[j])
+
+# deal with gaps in sequences by taking two aligned pham lists and breaks then into gapless segnments. A segment stops when either sequence has a gap.
+
+def gapless_segments(aligned1, aligned2, gap = "---"):
+    segments = []
+    activeAlignment1 = []
+    activeAlignment2 = []
+
+    for pham1, pham2 in zip(aligned1, aligned2):
+
+        if pham1 == gap or pham2 == gap:
+            if activeAlignment1 and activeAlignment2:
+                segments.append((activeAlignment1, activeAlignment2))
+
+            activeAlignment1 = []
+            activeAlignment2 = []
+
+        else:
+            activeAlignment1.append(pham1)
+            activeAlignment2.append(pham2)
+
+    if activeAlignment1 and activeAlignment2:
+        segments.append((activeAlignment1, activeAlignment2))
+
+    return segments
+
+# Pairwise alignment
+
+
+
+
